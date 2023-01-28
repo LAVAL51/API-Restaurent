@@ -1,0 +1,34 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}ClientOrder{% endblock %}
+
+{% block content %}
+    <h1>ClientOrder</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>NumCommande</th>
+                <td>{{ client_order.id }}</td>
+            </tr>
+            <tr>
+                <th>DateCommande</th>
+                <td>{{ client_order.dateCommande ? client_order.dateCommande|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ client_order.prix }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ client_order.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_client_order_index') }}">back to list</a>
+
+    <a href="{{ path('app_client_order_edit', {'id': client_order.id}) }}">edit</a>
+
+    {{ include('client_order/_delete_form.html.twig') }}
+{% endblock %}

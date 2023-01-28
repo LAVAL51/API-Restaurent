@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>Document</title>
+  {% block stylesheets %}
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .header {
+            display: flex;
+            background-color: black;
+            color: white;
+            padding: 1rem;
+        }
+
+        .title {
+            margin: 0;
+            text-decoration: 0;
+            color: white;
+        }
+
+        img {
+            margin: 0 0 0 1rem;
+            width: 2rem;
+            height: 2rem;
+            object-fit: cover;
+        }
+
+        .connect {
+            margin: auto 0 auto 2rem;
+        }
+
+        .nav {
+            margin: auto 0 auto 1rem;
+        }
+
+        .link {
+            margin: auto 2rem auto auto;
+            text-decoration: none;
+            background-color: gray;
+            color: white;
+            padding: .3rem;
+            border-radius: 0.5rem;
+        }
+
+        .link:hover {
+            opacity: 80%;
+        }
+    </style>
+  {% endblock %}
+</head>
+<body>
+<div class="header">
+  <h1 class="title"><a class="title" href="/">Gusteau's</a></h1>
+  <img src="./../web/img/gusto.jpg" alt="logo">
+  {% if app.user %}
+    <span class="connect">Bienvenue {{ app.user.username }}</span>
+  {% endif %}
+  <nav class="nav">
+    <a class="link" href="/equipe">Équipe</a>
+    <a class="link" href="/carte">Catégories</a>
+    {% if app.user %}
+      {% for role in app.user.roles %}
+        {% if role == 'ROLE_ADMIN' %}
+          <a class="link" href="/admin/category">Gestion Catégorie</a>
+          <a class="link" href="/admin/dish">Gestion Plats</a>
+          <a class="link" href="/admin/allergen">Gestion Allèrgènes</a>
+          <a class="link" href="/admin/user">Gestion Utilisateur</a>
+        {% endif %}
+        <a class="link" href="/order">Commandes</a>
+      {% endfor %}
+    {% endif %}
+  </nav>
+  {% if app.user %}
+    <a class="link" href="{{ path('app_logout') }}">Se déconnecter</a>
+  {% else %}
+    <a class="link" href="/connect">Se connecter</a>
+  {% endif %}
+</div>
+</body>
+</html>
+

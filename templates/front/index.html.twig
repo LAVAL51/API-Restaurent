@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block content %}
+  <div>
+    <h1>Menu :</h1>
+    <ul>
+      <li><a href="/equipe">Équipe</a></li>
+      <li><a href="/carte">Catégories</a></li>
+      <li><a href="/admin">Gérer</a></li>
+      <li>TBD</li>
+    </ul>
+  </div>
+  {{ render(controller('App\\Controller\\BlockController::dayDishes')) }}
+  <div class="day-team-block">
+    <h3>Équipe du jour pour le {{ rhServices.date }}</h3>
+    <ul>
+      <h5>Midi : </h5>
+      {% for user in rhServices.midi %}
+        <li>{{ user.firstname }} {{ user.lastname }}</li>
+      {% endfor %}
+      <h5>Soir :</h5>
+      {% for user in rhServices.soir %}
+        <li>{{ user.firstname }} {{ user.lastname }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block content %}
+  <div>
+    {% if app.user %}
+      <h1>Bienvenue {{ app.user.username }}</h1>
+    {% endif %}
+    <ul>
+      <li><a href="/admin/category">Catégorie</a></li>
+      <li><a href="/admin/dish">Plats</a></li>
+      <li><a href="/admin/allergen">Allèrgènes</a></li>
+      <li><a href="/admin/user">Utilisateur</a></li>
+    </ul>
+
+    {% if app.user %}
+      <a href="{{ path('app_logout') }}">Déconnexion</a>
+    {% endif %}
+  </div>
+{% endblock %}

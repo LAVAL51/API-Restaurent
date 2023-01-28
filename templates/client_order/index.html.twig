@@ -1,0 +1,39 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}ClientOrder index{% endblock %}
+
+{% block content %}
+    <h1>ClientOrder index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>NumCommande</th>
+                <th>DateCommande</th>
+                <th>Prix</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client_order in client_orders %}
+            <tr>
+                <td>{{ client_order.id }}</td>
+                <td>{{ client_order.dateCommande ? client_order.dateCommande|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ client_order.prix }}</td>
+                <td>{{ client_order.status }}</td>
+                <td>
+                    <a href="{{ path('app_client_order_show', {'id': client_order.id}) }}">show</a>
+                    <a href="{{ path('app_client_order_edit', {'id': client_order.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_client_order_new') }}">Create new</a>
+{% endblock %}
